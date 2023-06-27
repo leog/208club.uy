@@ -27,7 +27,7 @@ interface PreviewData {
   token?: string
 }
 
-export default function ProjectSlugRoute(props: PageProps) {
+export default function Page(props: PageProps) {
   const { settings, post, morePosts, preview, token } = props
 
   if (preview) {
@@ -65,12 +65,12 @@ export const getStaticProps: GetStaticProps<
 
   const token = previewData.token
 
-  const [settings, { post, morePosts }] = await Promise.all([
+  const [settings, { post }] = await Promise.all([
     getSettings(),
     getPostAndMoreStories(params.slug, token),
   ])
 
-  if (!post) {
+  if (!post._id) {
     return {
       notFound: true,
     }
@@ -79,7 +79,7 @@ export const getStaticProps: GetStaticProps<
   return {
     props: {
       post,
-      morePosts,
+      morePosts: post.related,
       settings,
       preview,
       token: previewData.token ?? null,

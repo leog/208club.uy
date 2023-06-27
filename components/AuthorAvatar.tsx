@@ -1,11 +1,12 @@
 import { urlForImage } from 'lib/sanity.image'
 import type { Author } from 'lib/sanity.queries'
 import Image from 'next/image'
+import Link from 'next/link'
 
 export default function AuthorAvatar(props: Author) {
-  const { name, picture } = props
+  const { name, picture, slug } = props
   return (
-    <div className="flex items-center">
+    <Link href={`/autor/${slug}`} className="flex items-center hover:cursor-pointer">
       <div className="relative mr-4 h-12 w-12">
         <Image
           src={
@@ -19,7 +20,7 @@ export default function AuthorAvatar(props: Author) {
           alt={picture.alt ?? name}
         />
       </div>
-      <div className="text-xl font-bold">{name}</div>
-    </div>
+      <div className="text-xl font-bold underline decoration-[#BFDD0C]">{name}</div>
+    </Link>
   )
 }

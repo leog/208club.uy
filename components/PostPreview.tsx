@@ -4,6 +4,8 @@ import Date from 'components/PostDate'
 import type { Post } from 'lib/sanity.queries'
 import Link from 'next/link'
 
+import PostCategories from './PostCategories'
+
 export default function PostPreview({
   title,
   coverImage,
@@ -11,6 +13,7 @@ export default function PostPreview({
   excerpt,
   author,
   slug,
+  categories,
 }: Omit<Post, '_id'>) {
   return (
     <div>
@@ -22,16 +25,17 @@ export default function PostPreview({
           priority={false}
         />
       </div>
-      <h3 className="mb-3 text-3xl leading-snug">
-        <Link href={`/posts/${slug}`} className="hover:underline">
+      <h3 className="mb-1 text-3xl leading-snug">
+        <Link href={`/posts/${slug}`} className="underline decoration-[#BFDD0C]">
           {title}
         </Link>
       </h3>
+      <PostCategories categories={categories} />
       <div className="mb-4 text-lg">
         <Date dateString={date} />
       </div>
       {excerpt && <p className="mb-4 text-lg leading-relaxed">{excerpt}</p>}
-      {author && <Avatar name={author.name} picture={author.picture} />}
+      {author && <Avatar slug={author.slug} bio={author.bio} name={author.name} picture={author.picture} />}
     </div>
   )
 }

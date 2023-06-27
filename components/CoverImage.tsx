@@ -14,12 +14,12 @@ export default function CoverImage(props: CoverImageProps) {
   const { title, slug, image: source, priority } = props
   const image = source?.asset?._ref ? (
     <div
-      className={cn('shadow-small', {
+      className={cn('shadow-small rounded-tr-3xl rounded-bl-3xl', {
         'transition-shadow duration-200 hover:shadow-medium': slug,
       })}
     >
       <Image
-        className="h-auto w-full"
+        className="h-auto w-full rounded-tr-3xl rounded-bl-3xl"
         width={2000}
         height={1000}
         alt={`Cover Image for ${title}`}
@@ -29,7 +29,7 @@ export default function CoverImage(props: CoverImageProps) {
       />
     </div>
   ) : (
-    <div style={{ paddingTop: '50%', backgroundColor: '#ddd' }} />
+    <div className='pt-[50%] bg-gray-300 rounded-tr-3xl rounded-bl-3xl' />
   )
 
   return (

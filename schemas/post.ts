@@ -70,6 +70,18 @@ export default defineType({
       type: 'reference',
       to: [{ type: authorType.name }],
     }),
+    defineField({
+      name: 'categories',
+      type: 'array',
+      of: [
+        {
+          type: 'reference',
+          to: [
+            { type: 'category' },
+          ]
+        }
+      ]
+    }),
   ],
   preview: {
     select: {

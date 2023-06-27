@@ -7,7 +7,11 @@ const postFields = groq`
   excerpt,
   coverImage,
   "slug": slug.current,
-  "author": author->{name, picture},
+  "author": author->{name, bio, "slug": slug.current, picture},
+  categories[]->{
+    name, 
+    "slug": slug.current
+  }
 `
 
 export const settingsQuery = groq`*[_type == "settings"][0]`
@@ -20,17 +24,58 @@ export const indexQuery = groq`
 export const postAndMoreStoriesQuery = groq`
 {
   "post": *[_type == "post" && slug.current == $slug] | order(_updatedAt desc) [0] {
-    content,
-    ${postFields}
-  },
-  "morePosts": *[_type == "post" && slug.current != $slug] | order(date desc, _updatedAt desc) [0...2] {
-    content,
-    ${postFields}
+    ${postFields},
+    "related": *[_type == "post" && slug.current != $slug && count(categories[@._ref in ^.^.categories[]._ref]) > 0] | order(publishedAt desc, _createdAt desc) [0..2] {
+      ${postFields}
+    }
   }
 }`
 
 export const postSlugsQuery = groq`
 *[_type == "post" && defined(slug.current)][].slug.current
+`
+
+export const postsByAuthorSlugQuery = groq`
+*[_type == "author" && slug.current == $slug][0] {
+  name,
+  bio,
+  "authorPic": picture.asset->url,
+  "posts": *[_type == "post" && author._ref in *[_type=="author" && name == name ]._id ]{
+    title,
+    "slug": slug.current,
+    coverImage,
+    excerpt,
+    categories[]->{
+      name, 
+      "slug": slug.current
+    }
+  }
+}
+`
+
+export const postsByCategorySlugQuery = groq`
+*[_type == "category" && slug.current == $slug] {
+  name,
+  description,
+  "posts": *[_type=='post' && references(^._id)]{
+    title,
+    "slug": slug.current,
+    coverImage,
+    excerpt,
+    categories[]->{
+      name, 
+      "slug": slug.current
+    }
+  }
+}
+`
+
+export const authorSlugsQuery = groq`
+*[_type == "author" && defined(slug.current)][].slug.current
+`
+
+export const categorySlugsQuery = groq`
+*[_type == "category" && defined(slug.current)][].slug.current
 `
 
 export const postBySlugQuery = groq`
@@ -41,7 +86,15 @@ export const postBySlugQuery = groq`
 
 export interface Author {
   name?: string
+  slug: string
+  bio: string
   picture?: any
+}
+
+export interface Category {
+  name: string
+  slug: string
+  description: string
 }
 
 export interface Post {
@@ -53,6 +106,7 @@ export interface Post {
   author?: Author
   slug?: string
   content?: any
+  categories?: Category[]
 }
 
 export interface Settings {

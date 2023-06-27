@@ -1,9 +1,14 @@
 import { apiVersion, dataset, projectId, useCdn } from 'lib/sanity.api'
 import {
+  authorSlugsQuery,
+  Category,
+  categorySlugsQuery,
   indexQuery,
   type Post,
   postAndMoreStoriesQuery,
   postBySlugQuery,
+  postsByAuthorSlugQuery,
+  postsByCategorySlugQuery,
   postSlugsQuery,
   type Settings,
   settingsQuery,
@@ -39,6 +44,22 @@ export async function getAllPostsSlugs(): Promise<Pick<Post, 'slug'>[]> {
   return []
 }
 
+export async function getAllAuthorSlugs(): Promise<Pick<Post, 'slug'>[]> {
+  if (client) {
+    const slugs = (await client.fetch<string[]>(authorSlugsQuery)) || []
+    return slugs.map((slug) => ({ slug }))
+  }
+  return []
+}
+
+export async function getAllCategorySlugs(): Promise<Pick<Category, 'slug'>[]> {
+  if (client) {
+    const slugs = (await client.fetch<string[]>(categorySlugsQuery)) || []
+    return slugs.map((slug) => ({ slug }))
+  }
+  return []
+}
+
 export async function getPostBySlug(slug: string): Promise<Post> {
   if (client) {
     return (await client.fetch(postBySlugQuery, { slug })) || ({} as any)
@@ -46,10 +67,24 @@ export async function getPostBySlug(slug: string): Promise<Post> {
   return {} as any
 }
 
+export async function getAuthorPosts(slug: string): Promise<{ posts: Post[]; name: string; bio: string; authorPic: string; }> {
+  if (client) {
+    return (await client.fetch(postsByAuthorSlugQuery, { slug })) || { name: "", bio: "", authorPic: "", posts: [] }
+  }
+  return { name: "", bio: "", authorPic: "", posts: [] }
+}
+
+export async function getPostsByCategory(slug: string): Promise<{ posts: Post[] }> {
+  if (client) {
+    return (await client.fetch(postsByCategorySlugQuery, { slug })) || { posts: [] }
+  }
+  return { posts: [] }
+}
+
 export async function getPostAndMoreStories(
   slug: string,
   token?: string | null
-): Promise<{ post: Post; morePosts: Post[] }> {
+): Promise<{ post: Post & { related: Post[] }; }> {
   if (projectId) {
     const client = createClient({
       projectId,
@@ -60,5 +95,5 @@ export async function getPostAndMoreStories(
     })
     return await client.fetch(postAndMoreStoriesQuery, { slug })
   }
-  return { post: null, morePosts: [] }
+  return { post: { _id: null, related: [] } }
 }
