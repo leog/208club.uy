@@ -17,7 +17,7 @@ export function OpenGraphImage(props: { title: string }) {
         justifyContent: 'space-between',
         flexWrap: 'nowrap',
         backgroundColor: 'white',
-        backgroundImage: 'url(http://localhost:3000/encuentro1_2.jpg)',
+        backgroundImage: 'url(http://208club.uy/encuentro1_2.jpg)',
         backgroundRepeat: 'no-repeat'
       }}
     >
@@ -26,7 +26,7 @@ export function OpenGraphImage(props: { title: string }) {
         justifyContent: 'center', height: "100%", flexDirection: "column",
         padding: "15px", backgroundColor: "rgba(0, 0, 0, 0.5)"
       }}>
-        <img src="http://localhost:3000/logo.png" width="950" />
+        <img src="http://208club.uy/logo.png" width="950" />
         <div
           style={{
             display: 'flex',
