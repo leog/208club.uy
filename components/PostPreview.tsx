@@ -26,7 +26,7 @@ export default function PostPreview({
         />
       </div>
       <h3 className="mb-1 text-3xl leading-snug">
-        <Link href={`/posts/${slug}`} className="underline decoration-[#BFDD0C]">
+        <Link href={`/posts/${slug}`} className="underline decoration-neon">
           {title}
         </Link>
       </h3>

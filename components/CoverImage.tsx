@@ -29,7 +29,7 @@ export default function CoverImage(props: CoverImageProps) {
       />
     </div>
   ) : (
-    <div className='pt-[50%] bg-gray-300 rounded-tr-3xl rounded-bl-3xl' />
+    <div className='pt-[50%] bg-gray-300 dark:bg-gray-700 rounded-tr-3xl rounded-bl-3xl' />
   )
 
   return (

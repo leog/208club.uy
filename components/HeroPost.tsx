@@ -21,7 +21,7 @@ export default function HeroPost(
       <div className="mb-20 md:mb-28 md:grid md:grid-cols-2 md:gap-x-16 lg:gap-x-8">
         <div>
           <h3 className="mb-1 text-4xl leading-tight lg:text-6xl">
-            <Link href={`/posts/${slug}`} className="underline decoration-[#BFDD0C]">
+            <Link href={`/posts/${slug}`} className="underline decoration-neon">
               {title || 'Untitled'}
             </Link>
           </h3>

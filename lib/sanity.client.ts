@@ -1,5 +1,6 @@
 import { apiVersion, dataset, projectId, useCdn } from 'lib/sanity.api'
 import {
+  allCategoriesQuery,
   authorSlugsQuery,
   Category,
   categorySlugsQuery,
@@ -67,7 +68,7 @@ export async function getPostBySlug(slug: string): Promise<Post> {
   return {} as any
 }
 
-export async function getAuthorPosts(slug: string): Promise<{ posts: Post[]; name: string; bio: string; authorPic: string; }> {
+export async function getAuthorPosts(slug: string): Promise<{ posts: Post[]; name: string; bio: string; authorPic: string; introSlug?: string; }> {
   if (client) {
     return (await client.fetch(postsByAuthorSlugQuery, { slug })) || { name: "", bio: "", authorPic: "", posts: [] }
   }
@@ -96,4 +97,11 @@ export async function getPostAndMoreStories(
     return await client.fetch(postAndMoreStoriesQuery, { slug })
   }
   return { post: { _id: null, related: [] } }
+}
+
+export async function getAllCategories() {
+  if (client) {
+    return (await client.fetch(allCategoriesQuery)) || []
+  }
+  return []
 }

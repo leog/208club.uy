@@ -1,10 +1,12 @@
 import AuthorPage from 'components/AuthorPage'
+import Footer from 'components/Footer'
 import {
     getAllAuthorSlugs,
+    getAllCategories,
     getAuthorPosts,
     getSettings,
 } from 'lib/sanity.client'
-import { Post, Settings } from 'lib/sanity.queries'
+import { Category, Post, Settings } from 'lib/sanity.queries'
 import { GetStaticProps } from 'next'
 
 interface PageProps {
@@ -13,8 +15,10 @@ interface PageProps {
         name: string;
         bio: string;
         authorPic: string;
+        introPost?: Post;
     }
     settings?: Settings
+    categories: Category[]
 }
 
 interface Query {
@@ -26,10 +30,13 @@ interface PreviewData {
 }
 
 export default function Page(props: PageProps) {
-    const { settings, author } = props
+    const { settings, author, categories } = props
 
     return (
-        <AuthorPage author={author} settings={settings} />
+        <>
+            <AuthorPage author={author} settings={settings} />
+            <Footer categories={categories} />
+        </>
     )
 }
 
@@ -40,15 +47,17 @@ export const getStaticProps: GetStaticProps<
 > = async (ctx) => {
     const { params = {} } = ctx
 
-    const [settings, authorPosts] = await Promise.all([
+    const [settings, authorPosts, categories] = await Promise.all([
         getSettings(),
         getAuthorPosts(params.slug),
+        getAllCategories()
     ])
 
     return {
         props: {
             author: authorPosts,
             settings,
+            categories,
         },
     }
 }

@@ -1,14 +1,16 @@
 import { PreviewSuspense } from '@sanity/preview-kit'
 import CategoryPage from 'components/CategoryPage'
+import Footer from 'components/Footer'
 import IndexPage from 'components/IndexPage'
 import {
     getAllAuthorSlugs,
+    getAllCategories,
     getAllCategorySlugs,
     getAuthorPosts,
     getPostsByCategory,
     getSettings,
 } from 'lib/sanity.client'
-import { Post, Settings } from 'lib/sanity.queries'
+import { Category, Post, Settings } from 'lib/sanity.queries'
 import { GetStaticProps } from 'next'
 import { lazy } from 'react'
 
@@ -21,6 +23,7 @@ interface PageProps {
         description: string;
     }
     settings?: Settings
+    categories: Category[]
 }
 
 interface Query {
@@ -32,10 +35,13 @@ interface PreviewData {
 }
 
 export default function Page(props: PageProps) {
-    const { settings, category } = props
+    const { settings, category, categories } = props
 
     return (
-        <CategoryPage category={category} settings={settings} />
+        <>
+            <CategoryPage category={category} settings={settings} />
+            <Footer categories={categories} />
+        </>
     )
 }
 
@@ -46,15 +52,17 @@ export const getStaticProps: GetStaticProps<
 > = async (ctx) => {
     const { params = {} } = ctx
 
-    const [settings, categoryPosts] = await Promise.all([
+    const [settings, categoryPosts, categories] = await Promise.all([
         getSettings(),
         getPostsByCategory(params.slug),
+        getAllCategories()
     ])
 
     return {
         props: {
             category: categoryPosts[0],
             settings,
+            categories,
         },
     }
 }

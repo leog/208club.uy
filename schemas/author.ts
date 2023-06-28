@@ -19,6 +19,12 @@ export default defineType({
       type: 'text',
     }),
     defineField({
+      name: 'intro',
+      title: 'Intro post',
+      type: 'reference',
+      to: [{ type: "post" }],
+    }),
+    defineField({
       name: 'slug',
       title: 'Slug',
       type: 'slug',

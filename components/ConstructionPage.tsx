@@ -10,6 +10,5 @@ export default function ConstructionPage() {
             <BlogHeader title={"208Club.uy"} description={["208Club.uy"]} level={1} />
             <h1 className='text-6xl mb-12'>En construcción...</h1>
         </Container>
-        <Footer />
     </Layout>)
 }

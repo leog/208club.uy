@@ -8,7 +8,7 @@ export default function PostCategories(props: Pick<Post, "categories"> & { class
             {categories.map((cat, idx) =>
                 <li key={idx}>
                     <Link href={`/categoria/${cat.slug}`} className="hover:underline flex items-center group italic">
-                        <span className="text-[#BFDD0C]">#</span><span>{cat.name}</span>
+                        <span className="text-neon">#</span><span>{cat.name}</span>
                     </Link>
                 </li>
             )}

@@ -1,11 +1,13 @@
 import { PreviewSuspense } from '@sanity/preview-kit'
+import Footer from 'components/Footer'
 import PostPage from 'components/PostPage'
 import {
+  getAllCategories,
   getAllPostsSlugs,
   getPostAndMoreStories,
   getSettings,
 } from 'lib/sanity.client'
-import { Post, Settings } from 'lib/sanity.queries'
+import { Category, Post, Settings } from 'lib/sanity.queries'
 import { GetStaticProps } from 'next'
 import { lazy } from 'react'
 
@@ -17,6 +19,7 @@ interface PageProps {
   settings?: Settings
   preview: boolean
   token: string | null
+  categories: Category[]
 }
 
 interface Query {
@@ -28,19 +31,23 @@ interface PreviewData {
 }
 
 export default function Page(props: PageProps) {
-  const { settings, post, morePosts, preview, token } = props
+  const { settings, post, morePosts, preview, token, categories } = props
 
   if (preview) {
     return (
       <PreviewSuspense
         fallback={
-          <PostPage
-            loading
-            preview
-            post={post}
-            morePosts={morePosts}
-            settings={settings}
-          />
+          <>
+            <PostPage
+              loading
+              preview
+              post={post}
+              morePosts={morePosts}
+              settings={settings}
+            />
+
+            <Footer categories={categories} />
+          </>
         }
       >
         <PreviewPostPage
@@ -53,7 +60,12 @@ export default function Page(props: PageProps) {
     )
   }
 
-  return <PostPage post={post} morePosts={morePosts} settings={settings} />
+  return (
+    <>
+      <PostPage post={post} morePosts={morePosts} settings={settings} />
+      <Footer categories={categories} />
+    </>
+  )
 }
 
 export const getStaticProps: GetStaticProps<
@@ -65,9 +77,10 @@ export const getStaticProps: GetStaticProps<
 
   const token = previewData.token
 
-  const [settings, { post }] = await Promise.all([
+  const [settings, { post }, categories] = await Promise.all([
     getSettings(),
     getPostAndMoreStories(params.slug, token),
+    getAllCategories()
   ])
 
   if (!post._id) {
@@ -81,6 +94,7 @@ export const getStaticProps: GetStaticProps<
       post,
       morePosts: post.related,
       settings,
+      categories,
       preview,
       token: previewData.token ?? null,
     },

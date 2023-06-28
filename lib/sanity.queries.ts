@@ -21,6 +21,13 @@ export const indexQuery = groq`
   ${postFields}
 }`
 
+export const allCategoriesQuery = groq`
+*[_type == "category"] {
+  name, 
+  description,
+  "slug": slug.current
+}`
+
 export const postAndMoreStoriesQuery = groq`
 {
   "post": *[_type == "post" && slug.current == $slug] | order(_updatedAt desc) [0] {
@@ -39,6 +46,7 @@ export const postsByAuthorSlugQuery = groq`
 *[_type == "author" && slug.current == $slug][0] {
   name,
   bio,
+  "introPost": *[_type == "post" && slug.current == ^.intro->slug.current ][0] { "slug": slug.current, excerpt },
   "authorPic": picture.asset->url,
   "posts": *[_type == "post" && author._ref in *[_type=="author" && name == name ]._id ]{
     title,
@@ -89,6 +97,7 @@ export interface Author {
   slug: string
   bio: string
   picture?: any
+  intro?: Post
 }
 
 export interface Category {

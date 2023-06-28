@@ -1,14 +1,20 @@
 "use client"
 import { useTheme } from "next-themes";
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 
 const LightsButton = () => {
     const { resolvedTheme, setTheme } = useTheme();
+    const [hasMounted, setHasMounted] = useState(false);
+
+    useEffect(() => setHasMounted(true), []);
+
+    if (!hasMounted) return null;
+
     return (
         <button
             onClick={() => resolvedTheme === "dark" ? setTheme('light') : setTheme("dark")}
-            className={`${resolvedTheme === "dark" ? "text-white hover:text-green-500" : "text-green-500 hover:text-black"} transition-all duration-200`}>
+            className={`${resolvedTheme === "dark" ? "text-gray-400 hover:text-green-500" : "text-green-500 hover:text-black"} transition-all duration-200`}>
             <svg fill="currentColor" height="24px" width="24px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
                 <g>
                     <g>

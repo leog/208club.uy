@@ -20,7 +20,7 @@ export default function AuthorAvatar(props: Author) {
           alt={picture.alt ?? name}
         />
       </div>
-      <div className="text-xl font-bold underline decoration-[#BFDD0C]">{name}</div>
+      <div className="text-xl font-bold underline decoration-neon">{name}</div>
     </Link>
   )
 }
