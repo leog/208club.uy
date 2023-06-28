@@ -8,7 +8,7 @@ const navigation = {
     ]
 }
 
-export default function Footer({ categories }: { categories: Category[] }) {
+export default function Footer({ categories = [] }: { categories: Category[] }) {
     return (
         <footer className="bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-500 border-t" aria-labelledby="footer-heading">
             <h2 id="footer-heading" className="sr-only">

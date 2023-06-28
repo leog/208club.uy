@@ -52,7 +52,7 @@ export const getStaticProps: GetStaticProps<
 > = async (ctx) => {
     const { params = {} } = ctx
 
-    const [settings, categoryPosts, categories] = await Promise.all([
+    const [settings, categoryPosts, categories = []] = await Promise.all([
         getSettings(),
         getPostsByCategory(params.slug),
         getAllCategories()

@@ -47,7 +47,7 @@ export const getStaticProps: GetStaticProps<
 > = async (ctx) => {
     const { params = {} } = ctx
 
-    const [settings, authorPosts, categories] = await Promise.all([
+    const [settings, authorPosts, categories = []] = await Promise.all([
         getSettings(),
         getAuthorPosts(params.slug),
         getAllCategories()

@@ -77,7 +77,7 @@ export const getStaticProps: GetStaticProps<
 
   const token = previewData.token
 
-  const [settings, { post }, categories] = await Promise.all([
+  const [settings, { post }, categories = []] = await Promise.all([
     getSettings(),
     getPostAndMoreStories(params.slug, token),
     getAllCategories()
