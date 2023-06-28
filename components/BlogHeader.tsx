@@ -2,6 +2,7 @@ import { PortableText } from '@portabletext/react'
 import Link from 'next/link'
 
 import styles from './BlogHeader.module.css'
+import LightsButton from './LightsButton'
 
 export default function BlogHeader({
   title,
@@ -16,25 +17,33 @@ export default function BlogHeader({
     case 1:
       return (
         <header className="mb-10 mt-16 flex flex-col items-center md:mb-12 md:flex-row md:justify-between">
-          <Link href="/" className="hover:underline">
+          <Link href="/" className="dark:hidden block">
             <img src="/logo_black.png" className='w-60' />
           </Link>
-          <h4
-            className={`mt-5 text-center text-lg md:pl-8 md:text-left ${styles.portableText}`}
-          >
-            <PortableText value={description} />
-          </h4>
+          <Link href="/" className="hidden dark:block">
+            <img src="/logo.png" className='w-60' />
+          </Link>
+          <div className='flex gap-3 mt-5 md:mt-0'>
+            <h4
+              className={`text-center text-lg md:pl-8 md:text-left ${styles.portableText}`}
+            >
+              <PortableText value={description} />
+            </h4>
+            <LightsButton />
+          </div>
         </header >
       )
 
     case 2:
       return (
-        <header>
-          <h2 className="mb-20 mt-8 text-2xl font-bold leading-tight tracking-tight md:text-4xl md:tracking-tighter flex md:justify-start justify-center">
-            <Link href="/" className="hover:underline">
-              <img src="/logo_black.png" className='w-60' />
-            </Link>
-          </h2>
+        <header className='mb-10 mt-16 flex flex-col md:flex-row items-center gap-5 md:mb-12 justify-between'>
+          <Link href="/" className="dark:hidden block">
+            <img src="/logo_black.png" className='w-60' />
+          </Link>
+          <Link href="/" className="hidden dark:block">
+            <img src="/logo.png" className='w-60' />
+          </Link>
+          <LightsButton />
         </header>
       )
 
