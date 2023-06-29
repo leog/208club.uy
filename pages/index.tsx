@@ -5,6 +5,7 @@ import { getAllCategories, getAllPosts, getSettings } from 'lib/sanity.client'
 import { Category, Post, Settings } from 'lib/sanity.queries'
 import { GetStaticProps } from 'next'
 import { lazy } from 'react'
+import generateRssFeed from 'utils/generateRSSFeed'
 
 const PreviewIndexPage = lazy(() => import('components/PreviewIndexPage'))
 
@@ -62,6 +63,8 @@ export const getStaticProps: GetStaticProps<
     getAllPosts(),
     getAllCategories()
   ])
+
+  await generateRssFeed();
 
   return {
     props: {

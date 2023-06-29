@@ -1,5 +1,6 @@
 import { Category } from "lib/sanity.queries"
 import Link from "next/link"
+import { MdRssFeed } from 'react-icons/md';
 
 const navigation = {
     other: [
@@ -16,7 +17,7 @@ export default function Footer({ categories = [] }: { categories: Category[] }) 
             </h2>
             <div className="mx-auto max-w-7xl px-6 pb-8 pt-16 sm:pt-24 lg:px-5 lg:pt-32">
                 <div className="xl:grid xl:grid-cols-3 xl:gap-8">
-                    <div className="space-y-2 mt-2">
+                    <div className="space-y-4 mt-2">
                         <Link href="/" className="dark:hidden block">
                             <img src="/logo_black.png" className='h-7' />
                         </Link>
@@ -26,6 +27,15 @@ export default function Footer({ categories = [] }: { categories: Category[] }) 
                         <p className="text-sm leading-6 text-gray-600 dark:text-gray-400">
                             Comunidad de propietarios de Peugeot 208 de Uruguay
                         </p>
+                        <Link
+                            href="/rss.xml"
+                            rel="noreferrer"
+                            target="_blank"
+                            className="inline-block"
+                            title="RSS"
+                        >
+                            <MdRssFeed color="#ee802f" size="24px" />
+                        </Link>
                     </div>
                     <div className="mt-16 grid grid-cols-2 gap-8 xl:col-span-2 xl:mt-0">
                         <div className="md:grid md:grid-cols-2 md:gap-8">

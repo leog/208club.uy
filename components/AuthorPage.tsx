@@ -49,7 +49,7 @@ export default function AuthorPage(props: IndexPageProps) {
               <div className="font-bold text-3xl">{author.name}</div>
               {author.introPost ? <div className="text-xl font-medium">{author.introPost.excerpt}</div> : author.bio && (<div className="text-xl font-medium">{author.bio}</div>)}
               {author.introPost && (<div className="text-lg font-medium">
-                <Link className='underline decoration-neon' href={`/post/${author.introPost.slug}`}><span className='text-neon'>▶</span> Ir al post de presentación</Link>
+                <Link className='underline decoration-neon' href={`/posts/${author.introPost.slug}`}><span className='text-neon'>▶</span> Ir al post de presentación</Link>
               </div>)}
             </div>
           </div>

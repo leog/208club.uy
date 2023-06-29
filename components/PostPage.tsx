@@ -30,7 +30,7 @@ export default function PostPage(props: PostPageProps) {
   if (!slug && !preview) {
     notFound()
   }
-  console.log({ content: post.content })
+
   return (
     <>
       <PostPageHead settings={settings} post={post} />
