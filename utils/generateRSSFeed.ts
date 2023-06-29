@@ -3,7 +3,7 @@ import { getAllPosts } from 'lib/sanity.client';
 import RSS from 'rss';
 
 export default async function generateRssFeed() {
-    const site_url = process.env.NODE_ENV === "production" ? process.env.NEXT_PUBLIC_VERCEL_URL : 'localhost:3000';
+    const site_url = process.env.NODE_ENV === "production" ? "208club.uy" : 'localhost:3000';
 
     const allPosts = await getAllPosts();
 
