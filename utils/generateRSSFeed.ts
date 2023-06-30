@@ -25,7 +25,12 @@ export default async function generateRssFeed() {
     const feed = new RSS(feedOptions);
 
     allPosts.map((post) => {
-        const coverImage = post.coverImage ? `<p><img src="${urlForImage(post.coverImage).url()}" /></p>` : "";
+        const coverImage = post.coverImage ? `<p>
+            <img style="
+                margin-bottom: 15px; 
+                border-top-right-radius: 1.5rem; 
+                border-bottom-left-radius: 1.5rem;" src="${urlForImage(post.coverImage).url()}" />
+        </p>` : "";
         feed.item({
             title: post.title,
             description: `${coverImage}<p>${post.excerpt ?? ""}</p>`,

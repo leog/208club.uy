@@ -26,6 +26,7 @@ import { apiVersion, dataset, projectId } from 'lib/sanity.api'
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { createClient, groq, type SanityClient } from 'next-sanity'
 import { type ParseBody, parseBody } from 'next-sanity/webhook'
+import generateRssFeed from 'utils/generateRSSFeed'
 
 export { config } from 'next-sanity/webhook'
 
@@ -156,7 +157,7 @@ async function queryStalePostRoutes(
     groq`*[_type == "post" && _id == $id].slug.current`,
     { id }
   )
-
+  await generateRssFeed();
   slugs = await mergeWithMoreStories(client, slugs)
 
   return ['/', ...slugs.map((slug) => `/posts/${slug}`)]

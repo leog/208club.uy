@@ -13,8 +13,9 @@ const LightsButton = () => {
 
     return (
         <button
+            title={resolvedTheme === "dark" ? "Prender luces" : "Apagar luces"}
             onClick={() => resolvedTheme === "dark" ? setTheme('light') : setTheme("dark")}
-            className={`${resolvedTheme === "dark" ? "text-gray-400 hover:text-green-500" : "text-green-500 hover:text-black"} transition-all duration-200`}>
+            className={`${resolvedTheme === "dark" ? "text-gray-400" : "text-green-500"} transition-all duration-200`}>
             <svg fill="currentColor" height="24px" width="24px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
                 <g>
                     <g>

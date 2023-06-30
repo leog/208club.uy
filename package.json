@@ -14,6 +14,7 @@
     "singleQuote": true
   },
   "dependencies": {
+    "@mailerlite/mailerlite-nodejs": "^1.1.0",
     "@portabletext/react": "3.0.2",
     "@sanity/image-url": "1.0.2",
     "@sanity/vision": "3.12.2",
@@ -35,6 +36,7 @@
     "vercel": "^30.2.3"
   },
   "devDependencies": {
+    "@tailwindcss/forms": "^0.5.3",
     "@types/react": "^18.2.1",
     "@types/rss": "^0.0.30",
     "autoprefixer": "^10.4.14",
