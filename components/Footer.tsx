@@ -2,6 +2,8 @@ import { Category } from "lib/sanity.queries"
 import Link from "next/link"
 import { MdRssFeed } from 'react-icons/md';
 
+import SubscribeForm from "./SubscribeForm";
+
 const navigation = {
     other: [
         { name: 'Funcionamiento', href: '/funcionamiento' },
@@ -70,28 +72,7 @@ export default function Footer({ categories = [] }: { categories: Category[] }) 
                         <p className="mt-2 text-sm leading-6 text-gray-600 dark:text-gray-400">
                             No te pierdas de ningun post, subscribite para recibirlos por email, al igual que nuevas fechas de encuentros y fotos.
                         </p>
-                        <form className="mt-6 sm:flex sm:max-w-md">
-                            <label htmlFor="email-address" className="sr-only">
-                                Email
-                            </label>
-                            <input
-                                type="email"
-                                name="email-address"
-                                id="email-address"
-                                autoComplete="email"
-                                required
-                                className="w-full min-w-0 appearance-none rounded-md border-0 bg-white px-3 py-1.5 text-base text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-neon sm:w-64 sm:text-sm sm:leading-6 xl:w-full"
-                                placeholder="Ingresa tu email"
-                            />
-                            <div className="mt-4 sm:ml-4 sm:mt-0 sm:flex-shrink-0">
-                                <button
-                                    type="submit"
-                                    className="flex w-full items-center justify-center rounded-md bg-neon px-3 py-2 text-sm font-semibold text-black shadow-sm hover:bg-black hover:text-neon focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-neon"
-                                >
-                                    Subscribirse
-                                </button>
-                            </div>
-                        </form>
+                        <SubscribeForm />
                     </div>
                 </div>
                 <div className="mt-16 border-t border-gray-900/10 dark:border-gray-500 pt-8 sm:mt-20 lg:mt-24 flex justify-between">
