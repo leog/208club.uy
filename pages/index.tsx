@@ -64,6 +64,8 @@ export const getStaticProps: GetStaticProps<
     getAllCategories()
   ])
 
+  await generateRssFeed();
+
   return {
     props: {
       posts,
