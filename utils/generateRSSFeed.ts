@@ -28,7 +28,7 @@ export default async function generateRssFeed() {
         const coverImage = post.coverImage ? `<p><img src="${urlForImage(post.coverImage).url()}" /></p>` : "";
         feed.item({
             title: post.title,
-            description: `${coverImage}${post.excerpt ?? ""}`,
+            description: `${coverImage}<p>${post.excerpt ?? ""}</p>`,
             url: `${site_url}/posts/${post.slug}`,
             date: post.date,
             author: post.author.name,
