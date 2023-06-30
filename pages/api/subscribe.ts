@@ -2,7 +2,7 @@ import MailerLite from '@mailerlite/mailerlite-nodejs';
 import type { NextApiRequest, NextApiResponse } from "next";
 
 const mailerlite = new MailerLite({
-    api_key: "API_KEY"
+    api_key: process.env.MAILERLITE_API_KEY,
 });
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
