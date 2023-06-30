@@ -16,6 +16,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     try {
         await generateRssFeed();
+        return res.status(201).json({ error: '' });
     } catch (error) {
         return res.status(500).json({ error: error.message || error.toString() });
     }
