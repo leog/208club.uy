@@ -1,5 +1,6 @@
 import fs from 'fs';
 import { getAllPosts } from 'lib/sanity.client';
+import { urlForImage } from 'lib/sanity.image';
 import RSS from 'rss';
 
 export default async function generateRssFeed() {
@@ -14,19 +15,31 @@ export default async function generateRssFeed() {
         feed_url: `${site_url}/rss.xml`,
         image_url: `${site_url}/logo.png`,
         pubDate: new Date(),
-        copyright: `&copy; Peugeot 208 Club Uruguay ${new Date().getFullYear()}`,
+        language: "es-UY",
+        copyright: `Peugeot 208 Club Uruguay ${new Date().getFullYear()}`,
+        custom_namespaces: {
+            wpse: "http://example.tld"
+        }
     };
 
     const feed = new RSS(feedOptions);
 
     allPosts.map((post) => {
+        const coverImage = post.coverImage ? `<p><img src="${urlForImage(post.coverImage).url()}" /></p>` : "";
         feed.item({
             title: post.title,
-            description: post.excerpt,
+            description: `${coverImage}${post.excerpt ?? ""}`,
             url: `${site_url}/posts/${post.slug}`,
             date: post.date,
             author: post.author.name,
             categories: post.categories.map((cat) => cat.name),
+            custom_elements: [
+                {
+                    "wpse:author_avatar": [
+                        urlForImage(post.author.picture).url()
+                    ]
+                }
+            ]
         });
     });
 
