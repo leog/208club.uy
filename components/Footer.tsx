@@ -1,6 +1,6 @@
 import { Category } from "lib/sanity.queries"
 import Link from "next/link"
-import { MdRssFeed } from 'react-icons/md';
+import { MdRssFeed, MdWhatsapp } from 'react-icons/md';
 
 import SubscribeForm from "./SubscribeForm";
 
@@ -20,7 +20,7 @@ export default function Footer({ categories = [] }: { categories: Category[] }) 
             <div className="mx-auto max-w-7xl px-6 xl:px-0 pb-8 pt-20 sm:pt-24 lg:px-8 lg:pt-32">
                 <div className="xl:grid xl:grid-cols-3 xl:gap-8">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8 xl:col-span-2">
-                        <div className="space-y-4">
+                        <div className="space-y-2">
                             <Link href="/" className="dark:hidden block !mt-1">
                                 <img src="/logo_black.png" className='h-7' />
                             </Link>
@@ -30,15 +30,28 @@ export default function Footer({ categories = [] }: { categories: Category[] }) 
                             <p className="text-sm leading-6 text-gray-600 dark:text-gray-400">
                                 Comunidad de propietarios de Peugeot 208 de Uruguay
                             </p>
-                            <Link
-                                href="/rss.xml"
-                                rel="noreferrer"
-                                target="_blank"
-                                className="inline-block"
-                                title="RSS"
-                            >
-                                <MdRssFeed color="#ee802f" size="24px" />
-                            </Link>
+                            <div className="flex flex-col gap-2">
+                                <svg width="0" height="0">
+                                    <linearGradient xmlns="http://www.w3.org/2000/svg" id="whatsapp-gradient" x1="85.915" x2="86.535" y1="32.567" y2="137.092" gradientUnits="userSpaceOnUse">
+                                        <stop offset="0" stop-color="#57d163" />
+                                        <stop offset="1" stop-color="#23b33a" />
+                                    </linearGradient>
+                                </svg>
+                                <Link
+                                    target="_blank"
+                                    rel="noreferrer"
+                                    href="https://chat.whatsapp.com/FS3TEQ6YCiyGG2DEt3qUh5"
+                                    className="flex gap-1 text-sm items-center text-[#23b33a]"
+                                >Unite al grupo <MdWhatsapp style={{ fill: "url(#whatsapp-gradient)" }} size="24px" /></Link>
+                                <Link
+                                    href="/rss.xml"
+                                    rel="noreferrer"
+                                    target="_blank"
+                                    title="RSS"
+                                >
+                                    <MdRssFeed color="#ee802f" size="24px" />
+                                </Link>
+                            </div>
                         </div>
                         <div className="grid grid-cols-2 md:gap-8">
                             <div>
