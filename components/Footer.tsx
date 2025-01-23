@@ -25,7 +25,7 @@ export default function Footer({
         Footer
       </h2>
       <div className="mx-auto max-w-7xl px-6 pb-8 pt-20 sm:pt-24 lg:px-8 lg:pt-32 xl:px-0">
-        <div className="xl:grid xl:grid-cols-3 xl:gap-8">
+        <div className="xl:grid xl:grid-cols-2 xl:gap-8">
           <div className="grid grid-cols-1 gap-8 md:grid-cols-2 xl:col-span-2">
             <div className="space-y-2">
               <Link href="/" className="!mt-1 block dark:hidden">
@@ -112,7 +112,7 @@ export default function Footer({
               </div>
             </div>
           </div>
-          <div className="mt-10 xl:mt-0">
+          {/*<div className="mt-10 xl:mt-0">
             <h3 className="text-sm font-semibold leading-6 text-gray-900 dark:text-gray-100">
               Subscribite a nuestro newsletter
             </h3>
@@ -121,7 +121,7 @@ export default function Footer({
               email, al igual que nuevas fechas de encuentros y fotos.
             </p>
             <SubscribeForm />
-          </div>
+          </div>*/}
         </div>
         <div className="mt-16 flex justify-between border-t border-gray-900/10 pt-8 dark:border-gray-500 sm:mt-20 lg:mt-24">
           <p className="text-xs leading-5 text-gray-500 dark:text-gray-400">

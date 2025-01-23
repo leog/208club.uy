@@ -1,8 +1,8 @@
-import 'tailwindcss/tailwind.css'
+import 'styles/globals.css'
 
 import { AppProps } from 'next/app'
 import { Open_Sans } from 'next/font/google'
-import { ThemeProvider } from "next-themes"
+import { ThemeProvider } from 'next-themes'
 
 const openSans = Open_Sans({ subsets: ['latin'] })
 
