@@ -3,7 +3,8 @@
 @tailwind utilities;
 
 @layer base {
-  article > ul {
+  article > ul,
+  section ul {
     @apply m-0 list-none p-0;
   }
 
