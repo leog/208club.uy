@@ -95,8 +95,8 @@ export const postBySlugQuery = groq`
 
 export interface Author {
   name?: string
-  slug: string
-  bio: string
+  slug?: string
+  bio?: string
   picture?: any
   intro?: Post
 }
