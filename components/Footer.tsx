@@ -7,7 +7,7 @@ import SubscribeForm from './SubscribeForm'
 const navigation = {
   other: [
     { name: 'Funcionamiento', href: '/funcionamiento' },
-    { name: 'Sobre nosotros', href: '/sobre-nosotros' },
+    { name: 'Sponsors', href: '/sponsors' },
   ],
 }
 
